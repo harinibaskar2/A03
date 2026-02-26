@@ -1,4 +1,4 @@
-import java.awt.*;
+package csc364;
 
 public class Producer implements Runnable {
     private final Repository repository;

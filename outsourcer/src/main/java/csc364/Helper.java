@@ -1,11 +1,15 @@
+package csc364;
+
 import java.util.List;
+
+
 
 public class Helper {
     public interface TimeoutHandler {
-        void onTimeout(Book.JobRecord record);
+        void onTimeout(Notetaker.JobRecord record);
     }
 
-    private final Book book = new Book();
+    private final Notetaker notetaker = new Notetaker();
     private final CronTimer cronTimer = new CronTimer();
 
     private final TimeoutHandler timeoutHandler;
@@ -23,22 +27,22 @@ public class Helper {
         cronTimer.start(checkInterval, this::checkForTimeouts);
     }
 
-    public Book getBook() {
-        return book;
+    public Notetaker getNotetaker() {
+        return notetaker;
     }
 
     public synchronized void onAssign(String workerId, String jobId, String jobContent) {
-        book.assign(workerId, jobId, jobContent);
+        notetaker.assign(workerId, jobId, jobContent);
     }
 
     private synchronized void checkForTimeouts() {
         long now = System.currentTimeMillis();
 
-        List<Book.JobRecord> records = book.snapshotRecords();
-        for (Book.JobRecord rec : records) {
+        List<Notetaker.JobRecord> records = notetaker.snapshotRecords();
+        for (Notetaker.JobRecord rec : records) {
             long elapsed = now - rec.startTime;
             if (elapsed > maxJobTime) {
-                book.workerDone(rec.workerId);
+                notetaker.workerDone(rec.workerId);
                 timeoutHandler.onTimeout(rec);
             }
         }

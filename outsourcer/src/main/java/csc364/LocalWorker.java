@@ -1,4 +1,7 @@
-import java.awt.*;
+package csc364;
+
+
+
 public class LocalWorker implements Runnable {
     private final Repository repository;
     private final int workerId;

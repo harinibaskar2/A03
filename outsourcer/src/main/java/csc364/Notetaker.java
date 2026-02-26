@@ -1,10 +1,12 @@
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+package csc364;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 
-public class Book {
+public class Notetaker {
     public static class JobRecord {
         public final String workerId;
         public final String jobId;
