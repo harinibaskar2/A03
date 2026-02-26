@@ -7,15 +7,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Repository {
     private final Queue<String> queue = new LinkedList<>();
-   // private final int capacity;
-
     private final Semaphore empty;
     private final Semaphore full;
-
     private final Lock lock = new ReentrantLock();
 
     public Repository(int capacity) {
-       // this.capacity = capacity;
         this.empty = new Semaphore(capacity);
         this.full = new Semaphore(0);
     }
@@ -44,5 +40,16 @@ public class Repository {
             empty.release();
         }
     }
-    
+
+    // Add this method to check if queue is empty
+    public boolean queueIsEmpty() {
+        lock.lock();
+        try {
+            return queue.isEmpty();
+        } finally {
+            lock.unlock();
+        }
+    }
 }
+
+

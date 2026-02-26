@@ -6,6 +6,7 @@ csc364/Helper$TimeoutHandler.class
 csc364/Helper.class
 csc364/CronTimer.class
 csc364/LocalWorker.class
+csc364/RemoteWorker.class
 csc364/Notetaker.class
 csc364/CronTimer$1.class
 csc364/Main.class
